@@ -4,7 +4,6 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import SearchPage from './components/SearchPage';
 import AddLocation from './components/AddLocation';
-import TambahLokasi from './components/TambahLokasi';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<AddLocation />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Layout>
     </Router>
