@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchForm from '../components/SearchForm';
-import MapComponent from '../components/MapComponent';
+import MapComponent from '../components/WarehouseMap';
 import ItemDetails from '../components/ItemDetails';
 import { searchLocation } from '../api/locationApi';
 

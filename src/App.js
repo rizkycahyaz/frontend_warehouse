@@ -1,21 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from '../pages/Home';
-import SearchPage from './components/SearchPage';
-import AddLocation from './components/AddLocation';
+import Home from './pages/Home';
+import Login from './pages/login';
+import AdminDashboard from './pages/adminDasboard';
+import AuthProvider from './context/authContext';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
+  const { isAuthenticated } = useAuth();
+
   return (
-    <Router>
-      <Layout>
+    <AuthProvider>
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/add" element={<AddLocation />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/login" element={<Login />} />
+          {isAuthenticated && <Route path="/admin" element={<AdminDashboard />} />}
         </Routes>
-      </Layout>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

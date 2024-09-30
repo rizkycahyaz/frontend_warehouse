@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapContainer, ImageOverlay, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import warehouseImage from '../assets/warehouse.png';
+import warehouseImage from '../assets/gudang22.jpg';
 
 const MapComponent = ({ location }) => {
   const bounds = [

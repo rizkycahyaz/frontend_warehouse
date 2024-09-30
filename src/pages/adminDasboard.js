@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getItems, deleteItem } from '../api/itemApi';
-import ItemList from '../components/itemList';
+import ItemList from '../components/ItemList';
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
