@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchForm from './SearchForm';
 import Map from './WarehouseMap';
-import { searchLocation } from '../services/api';
+import { searchLocation } from '../api/locationApi';
 
 const SearchPage = () => {
   const [locationData, setLocationData] = useState(null);

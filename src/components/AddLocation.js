@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addLocation } from '../services/api';
+import { addLocation } from '../api/locationApi';
 
 const AddLocation = () => {
   const [code, setCode] = useState('');
