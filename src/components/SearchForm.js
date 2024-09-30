@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import '../styles/SearchForm.css';
 
 const SearchForm = ({ onSearch }) => {
   const [code, setCode] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Submitting search for code:', code);
-    onSearch(code); // Pass the code to the parent component
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(code);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Enter code (e.g., 1A24A)" required />
+      <input type="text" placeholder="Enter item code" value={code} onChange={(e) => setCode(e.target.value)} />
       <button type="submit">Search</button>
     </form>
   );
