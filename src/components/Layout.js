@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Layout.css';
+import './styles/Layout.css';
 
 const Layout = ({ children }) => {
   return (
@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/search">Search</Link>
+              <Link to="/login">Admin Login</Link>
             </li>
           </ul>
         </nav>
