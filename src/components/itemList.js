@@ -1,6 +1,10 @@
 import React from 'react';
 
 const ItemList = ({ items, onDelete }) => {
+  if (!Array.isArray(items)) {
+    return <p>No items available</p>;
+  }
+
   return (
     <ul>
       {items.map(item => (

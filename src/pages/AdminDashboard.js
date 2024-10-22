@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getItems, deleteItem } from '../api/itemApi';
+import { deleteItem, getAdminItems } from '../api/itemAdminApi';
 import ItemList from '../components/ItemList';
 
 const AdminDashboard = () => {
@@ -7,8 +7,14 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const data = await getItems();
-      setItems(data);
+      try {
+        const data = await getAdminItems();
+        console.log(data);
+        setItems(Array.isArray(data) ? data : []); // Pastikan data adalah array
+      } catch (error) {
+        console.error(error);
+        alert(error.message); // Tampilkan pesan kesalahan kepada pengguna
+      }
     };
     fetchItems();
   }, []);

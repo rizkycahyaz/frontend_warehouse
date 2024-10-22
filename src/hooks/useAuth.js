@@ -1,10 +1,11 @@
+// src/hooks/useAuth.js
 import { useState, useEffect } from 'react';
 
 export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check for user authentication
+    // Check for user authentication on mount
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);

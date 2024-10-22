@@ -1,41 +1,15 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/api/items";
+const baseURL = "http://localhost:3000/api/items"; // Ini untuk pengguna biasa
 
 const getItems = async () => {
   try {
-    const response = await axios.get(baseURL);
+    const response = await axios.get(baseURL); // Tidak perlu token
     return response.data;
   } catch (error) {
-    throw new Error("Error fetching location");
+    console.error('Error fetching items:', error.message || error);
+    throw new Error('Error fetching items');
   }
 };
 
-const addItem = async (item) => {
-  try {
-    const response = await axios.post(baseURL, item);
-    return response.data;
-  } catch (error) {
-    throw new Error("Error fetching location");
-  }
-};
-
-const updateItem = async (id, updatedItem) => {
-  try {
-    const response = await axios.put(`${baseURL}/${id}`, updatedItem);
-    return response.data;
-  } catch (error) {
-    throw new Error("Error fetching location");
-  }
-};
-
-const deleteItem = async (id) => {
-  try {
-    const response = await axios.delete(`${baseURL}/${id}`);
-    return response.data;
-  } catch (error) {
-    throw new Error("Error fetching location");
-  }
-};
-
-export { getItems, addItem, updateItem, deleteItem };
+export { getItems };
