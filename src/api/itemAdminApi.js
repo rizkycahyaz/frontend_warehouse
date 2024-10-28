@@ -49,8 +49,7 @@ const getAdminItems = async () => {
 // };
 
 const addItem = async (newItem) => {
-  await axios.post('http://localhost:3000/api/items/create', newItem, {
-  });
+  await axios.post('http://localhost:3000/api/items/create', newItem);
 };
 
 // Fungsi untuk memperbarui item
