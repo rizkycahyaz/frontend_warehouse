@@ -21,7 +21,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     await deleteItem(id);
-    setItems(items.filter(item => item.id !== id));
+    setItems(items.filter((item) => item.id !== id));
   };
 
   return (

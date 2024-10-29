@@ -7,7 +7,7 @@ const ItemList = ({ items, onDelete }) => {
 
   return (
     <ul>
-      {items.map(item => (
+      {items.map((item) => (
         <li key={item.id}>
           {item.name} - {item.quantity}
           <button onClick={() => onDelete(item.id)}>Delete</button>
