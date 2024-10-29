@@ -3,7 +3,7 @@ import { MapContainer, ImageOverlay, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './styles/Map.css';
-import gambarGudang from '../assets/gudang22.jpg';
+import gambarGudang from '../assets/gudangdingin.jpg';
 import ikonMarker from 'leaflet/dist/images/marker-icon.png';
 import bayanganIkonMarker from 'leaflet/dist/images/marker-shadow.png';
 

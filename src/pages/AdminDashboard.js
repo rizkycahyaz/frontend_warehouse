@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { deleteItem, getAdminItems } from '../api/itemAdminApi';
 import ItemList from '../components/ItemList';
+import { Link } from 'react-router-dom'; // Impor dari react-router-dom
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
@@ -27,6 +28,9 @@ const AdminDashboard = () => {
   return (
     <div>
       <h1>Admin Dashboard</h1>
+      <Link to="/add-item">
+        <button>Add New Item</button>
+      </Link>
       <ItemList items={items} onDelete={handleDelete} />
     </div>
   );

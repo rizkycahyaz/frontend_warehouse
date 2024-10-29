@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Logine';
+import AddItem from './pages/AddItems';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import AuthProvider, { useAuthContext } from './context/authContext'; // Import AuthProvider and the hook
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/add-item" element={<AddItem />} />
             {/* Use a PrivateRoute component to check authentication */}
             <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
           </Routes>

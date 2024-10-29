@@ -29,23 +29,27 @@ const getAdminItems = async () => {
 };
 
 // Fungsi untuk menambahkan item baru
-const addItem = async (item) => {
-  try {
-    const token = localStorage.getItem('token'); // Pastikan token digunakan untuk setiap request
-    if (!token) {
-      throw new Error('No token found');
-    }
+// const addItem = async (item) => {
+//   try {
+//     const token = localStorage.getItem('token'); // Pastikan token digunakan untuk setiap request
+//     if (!token) {
+//       throw new Error('No token found');
+//     }
 
-    const response = await adminItemApi.post('/add', item, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error adding item:', error.message);
-    throw new Error('Error adding item');
-  }
+//     const response = await adminItemApi.post('/add', item, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error adding item:', error.message);
+//     throw new Error('Error adding item');
+//   }
+// };
+
+const addItem = async (newItem) => {
+  await axios.post('http://localhost:3000/api/items/create', newItem);
 };
 
 // Fungsi untuk memperbarui item
@@ -88,4 +92,9 @@ const deleteItem = async (id) => {
   }
 };
 
-export { getAdminItems, addItem, updateItem, deleteItem };
+const getAllLocations = async () => {
+  const response = await axios.get('http://localhost:3000/api/locations'); // pastikan '/api/locations'
+  return response.data;
+};
+
+export { getAdminItems, addItem, updateItem, deleteItem, getAllLocations };
