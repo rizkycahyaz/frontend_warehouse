@@ -7,7 +7,6 @@ import gambarGudang from '../assets/gudangdingin.jpg';
 import ikonMarker from 'leaflet/dist/images/marker-icon.png';
 import bayanganIkonMarker from 'leaflet/dist/images/marker-shadow.png';
 
-// Ikon marker kustom
 const ikonKustom = L.icon({
   iconUrl: ikonMarker,
   shadowUrl: bayanganIkonMarker,
@@ -43,26 +42,16 @@ const CustomMarker = ({ location, code }) => {
 };
 
 const Map = ({ location, code }) => {
-  // Batas map sesuai dengan ukuran gambar
-  const batas = [
+  const bounds = [
     [0, 0],
-    [1000, 2700], // Tinggi x Lebar dalam piksel
+    [1000, 2700],
   ];
 
   return (
     <div className="map-container">
-      <MapContainer
-        crs={L.CRS.Simple} // Sistem koordinat sederhana
-        bounds={batas} // Batas tampilan map
-        maxZoom={1} // Zoom maksimum
-        minZoom={-1} // Zoom minimum
-        style={{ height: '100%', width: '100%' }} // Memastikan map memenuhi wadah
-        scrollWheelZoom={false} // Menonaktifkan zoom menggunakan scroll roda mouse
-      >
-        {/* Tambahkan lapisan gambar sebagai latar belakang map */}
-        <ImageOverlay url={gambarGudang} bounds={batas} />
-        {/* Tampilkan marker kustom jika lokasi tersedia */}
-        {location && <CustomMarker location={location} code={code} />}
+      <MapContainer crs={L.CRS.Simple} bounds={bounds} maxZoom={1} minZoom={-1} style={{ height: '100%', width: '100%' }} scrollWheelZoom={false}>
+        <ImageOverlay url={gambarGudang} bounds={bounds} />
+        {location && code && <CustomMarker location={location} code={code} />}
       </MapContainer>
     </div>
   );
