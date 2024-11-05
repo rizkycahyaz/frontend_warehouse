@@ -29,8 +29,8 @@ const Layout = ({ children }) => {
             </Button>
           </Toolbar>
         </AppBar>
-        <main>{children}</main>
-        <Paper elevation={9}>
+        <main style={{ flexGrow: 1 }}>{children}</main> {/* Use flexGrow to fill remaining space */}
+        <Paper elevation={9} style={{ position: 'fixed', bottom: 0, width: '100%' }}>
           <Typography variant="body2" align="center">
             &copy; 2024 Warehouse Locator
           </Typography>

@@ -32,7 +32,7 @@ const addLocation = async (location) => {
 
 // locationApi.js
 
-const baseURL = 'http://localhost:3000/api/items';
+const baseURL = 'http://localhost:3000/api/locations';
 
 const searchLocation = async (lotBatchNo) => {
   try {
