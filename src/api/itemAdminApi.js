@@ -2,31 +2,36 @@ import axios from 'axios';
 
 // Instance untuk API Admin Items
 const adminItemApi = axios.create({
-  baseURL: 'http://localhost:3000/api/admin/items', // Base URL untuk API admin items
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: 'http://localhost:3000/api/admin/items' // Base URL untuk API admin items
 });
 
 // Fungsi untuk mengambil semua item admin
 const getAdminItems = async () => {
   try {
-    const token = localStorage.getItem('token'); // Ambil token dari localStorage
+    const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('No token found'); // Jika token tidak ditemukan
+      console.error('Token not found');
+      throw new Error('You must be logged in to access this data.');
     }
 
     const response = await adminItemApi.get('/', {
       headers: {
-        Authorization: `Bearer ${token}`, // Sertakan token dalam Authorization header
+        Authorization: `Bearer ${token}`,
       },
     });
+
+    if (!response.data || !Array.isArray(response.data)) {
+      console.warn('Unexpected response format:', response);
+      return []; // Return an empty array if data format is unexpected
+    }
+
     return response.data;
   } catch (error) {
-    console.error('Error fetching admin items:', error.message);
-    throw new Error('Error fetching admin items');
+    console.error('Error fetching admin items:', error);
+    throw error.response ? error.response.data : new Error('Error fetching admin items');
   }
 };
+
 
 // Fungsi untuk menambahkan item baru
 // const addItem = async (item) => {
@@ -48,8 +53,16 @@ const getAdminItems = async () => {
 //   }
 // };
 
-const addItem = async (newItem) => {
-  await axios.post('http://localhost:3000/api/items/create', newItem);
+// const addItem = async (newItem) => {
+//   await axios.post('http://localhost:3000/api/items/create', newItem);
+// };
+
+const addItem = async (formData) => {
+  return await axios.post('http://localhost:3000/api/items/create', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 // Fungsi untuk memperbarui item
@@ -73,18 +86,35 @@ const updateItem = async (id, updatedItem) => {
 };
 
 // Fungsi untuk menghapus item
-const deleteItem = async (id) => {
+// const deleteItem = async (lotBatchNo) => {
+//   try {
+//     const token = localStorage.getItem('token'); // Ambil token dari localStorage
+//     if (!token) {
+//       throw new Error('No token found'); // Pastikan token ada
+//     }
+
+//     const response = await adminItemApi.delete(`/delete/${lotBatchNo}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`, // Sertakan token dalam header
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error deleting item:", error.response || error.message);
+//     throw new Error("Error deleting item");
+//   }
+// };
+
+
+const deleteItem = async (lotBatchNo) => {
   try {
     const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No token found');
-    }
+    if (!token) throw new Error('Token missing');
 
-    const response = await adminItemApi.delete(`/delete/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const response = await axios.delete(`http://localhost:3000/api/items/delete/${lotBatchNo}`, {
+      headers: { Authorization: `Bearer ${token}` },
     });
+
     return response.data;
   } catch (error) {
     console.error('Error deleting item:', error.message);
