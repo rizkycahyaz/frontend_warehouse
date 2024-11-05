@@ -10,7 +10,7 @@ const AddItem = () => {
   const [unit, setUnit] = useState('');
   const [locationId, setLocationId] = useState(''); // Menyimpan location_id
   const [photo, setPhoto] = useState(null); // Untuk menyimpan file foto
-  const [locations, setLocations] = useState([]); // Menyimpan daftar lokasi
+  const [,setLocations] = useState([]); // Menyimpan daftar lokasi
   const navigate = useNavigate();
 
   // Ambil daftar lokasi dari backend saat komponen dimount
@@ -31,24 +31,24 @@ const AddItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const formData = {
-        lotBatchNo,
-        partNo,
-        description,
-        qty,
-        unit,
-        locationId,
-    }
- // Kirim location_id ke backend
-
+    const formData = new FormData();
+    formData.append('lotBatchNo', lotBatchNo);
+    formData.append('partNo', partNo);
+    formData.append('description', description);
+    formData.append('qty', qty);
+    formData.append('unit', unit);
+    formData.append('locationId', locationId);
+    formData.append('photo', photo); // Tambahkan file foto
+  
     try {
-      await addItem(formData); // Menggunakan fungsi addItem
-      navigate('/admin'); // Kembali ke dashboard setelah item ditambahkan
+      await addItem(formData); // Pastikan `addItem` mengirim `formData` sebagai data
+      navigate('/admin');
     } catch (error) {
       console.error(error);
       alert('Failed to add item');
     }
   };
+  
 
   return (
     <div>
