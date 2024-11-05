@@ -29,6 +29,8 @@ const AdminDashboard = () => {
       console.error(error);
       alert(error.message); // Tampilkan pesan kesalahan
     }
+    await deleteItem(id);
+    setItems(items.filter((item) => item.id !== id));
   };
   
   return (

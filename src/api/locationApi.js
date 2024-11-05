@@ -9,15 +9,15 @@ const locationApi = axios.create({
 });
 
 // Fungsi untuk mencari lokasi berdasarkan kode
-const searchLocation = async (code) => {
-  try {
-    const response = await locationApi.post('/search', { code });
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching location:', error.message);
-    throw new Error('Error fetching location');
-  }
-};
+// const searchLocation = async (code) => {
+//   try {
+//     const response = await locationApi.post('/search', { code });
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching location:', error.message);
+//     throw new Error('Error fetching location');
+//   }
+// };
 
 // Fungsi untuk menambahkan lokasi baru
 const addLocation = async (location) => {
@@ -27,6 +27,21 @@ const addLocation = async (location) => {
   } catch (error) {
     console.error('Error adding location:', error.message);
     throw new Error('Error adding location');
+  }
+};
+
+// locationApi.js
+
+const baseURL = 'http://localhost:3000/api/items';
+
+const searchLocation = async (lotBatchNo) => {
+  try {
+    const response = await axios.post(`${baseURL}/search`, { lot_batch_no: lotBatchNo });
+    console.log('API response data:', response.data); // Check if the API call is successful and data structure
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching location:', error.message || error);
+    return { status: false, message: 'Material not found' };
   }
 };
 
