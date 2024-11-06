@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { MapContainer, ImageOverlay, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import './styles/Map.css';
-import gambarGudang from '../assets/gudangdingin.jpg';
-import ikonMarker from 'leaflet/dist/images/marker-icon.png';
-import bayanganIkonMarker from 'leaflet/dist/images/marker-shadow.png';
+import React, { useEffect } from "react";
+import { MapContainer, ImageOverlay, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "./styles/Map.css";
+import gambarGudang from "../assets/gudangdingin.jpg";
+import ikonMarker from "leaflet/dist/images/marker-icon.png";
+import bayanganIkonMarker from "leaflet/dist/images/marker-shadow.png";
 
 const ikonKustom = L.icon({
   iconUrl: ikonMarker,
@@ -17,7 +17,7 @@ const ikonKustom = L.icon({
 });
 
 const CustomMarker = ({ location, code }) => {
-  const map = useMap(); // Mendapatkan referensi ke objek peta
+  const map = useMap();
 
   useEffect(() => {
     if (location) {
@@ -25,8 +25,6 @@ const CustomMarker = ({ location, code }) => {
 
       // Tambahkan marker ke map
       const marker = L.marker([y, x], { icon: ikonKustom }).addTo(map);
-      // Fokuskan map ke lokasi marker
-      map.setView([y, x], 0);
 
       // Tampilkan popup pada marker dengan informasi kode
       marker.bindPopup(`<b>Kode lokasi:</b> ${code}`).openPopup();
@@ -49,7 +47,15 @@ const Map = ({ location, code }) => {
 
   return (
     <div className="map-container">
-      <MapContainer crs={L.CRS.Simple} bounds={bounds} maxZoom={1} minZoom={-1} style={{ height: '100%', width: '100%' }} scrollWheelZoom={false}>
+      <MapContainer
+        crs={L.CRS.Simple}
+        bounds={bounds}
+        maxBounds={bounds} // Menambahkan maxBounds agar peta tidak bergeser
+        maxZoom={1}
+        minZoom={-1}
+        style={{ height: "100%", width: "100%" }}
+        scrollWheelZoom={false}
+      >
         <ImageOverlay url={gambarGudang} bounds={bounds} />
         {location && code && <CustomMarker location={location} code={code} />}
       </MapContainer>

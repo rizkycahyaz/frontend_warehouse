@@ -1,15 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'http://localhost:3000/api/items'; // Ini untuk pengguna biasa
+const baseURL = "http://localhost:3000/api/items"; // Base URL
 
-const getItems = async () => {
+// Fungsi untuk mengambil item berdasarkan lotBatchNo
+const getItemDetails = async (lotBatchNo) => {
   try {
-    const response = await axios.get(baseURL); // Tidak perlu token
-    return response.data;
+    const response = await axios.get(`${baseURL}/detail/${lotBatchNo}`);
+    return response.data; // Mengembalikan data item yang relevan
   } catch (error) {
-    console.error('Error fetching items:', error.message || error);
-    throw new Error('Error fetching items');
+    console.error("Error fetching item details:", error.message || error);
+    throw new Error("Error fetching item details");
   }
 };
 
-export { getItems };
+export { getItemDetails };

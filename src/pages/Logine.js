@@ -1,43 +1,77 @@
-import React, { useState } from 'react';
-import { login as loginApi } from '../api/authApi';
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/authContext'; // Use useAuthContext
+import React, { useState } from "react";
+import { login as loginApi } from "../api/authApi";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/authContext";
+import { Container, TextField, Button, Typography, Box } from "@mui/material";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuthContext(); // Get the login function from context
+  const { login } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { token } = await loginApi({ email, password });
-      login(token); // Call the login function with the token
-      navigate('/admin'); // Redirect to admin dashboard
+      login(token);
+      navigate("/admin");
     } catch (error) {
-      console.error('Login error:', error.message);
+      console.error("Login error:", error.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <Container
+      maxWidth="xs"
+      style={{ minHeight: "75vh", display: "flex", alignItems: "center" }}
+    >
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        width="100%"
+        padding={3}
+        boxShadow={3}
+        borderRadius={2}
+      >
+        <Typography variant="h4" component="h1" gutterBottom>
+          Login
+        </Typography>
+        <form onSubmit={handleSubmit} style={{ width: "100%", marginTop: 20 }}>
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            style={{ marginTop: 20 }}
+          >
+            Login
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 };
 
