@@ -48,16 +48,14 @@ const AdminDashboard = () => {
 
   return (
     <Box p={3}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Admin Dashboard
-      </Typography>
+      <Typography variant="h4" component="h1" gutterBottom></Typography>
       <Box display="flex" justifyContent="flex-end" mb={2}>
         <Button
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
           component={Link}
-          to="/add-item"
+          to="/admin/add-item"
         >
           Add New Item
         </Button>

@@ -35,9 +35,6 @@ const AddItem = () => {
     }
   };
 
-  const handleCancelPhoto = () => {
-    setPhoto(null);
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -130,16 +127,7 @@ const AddItem = () => {
           <Grid item xs={12}>
             <Button variant="outlined" component="label" fullWidth>
               Upload Photo
-              <input
-                type="file"
-                hidden
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    setPhoto(file);
-                  }
-                }}
-              />
+              <input type="file" hidden onChange={handlePhotoChange} />
             </Button>
           </Grid>
 
@@ -164,6 +152,17 @@ const AddItem = () => {
               </Typography>
             </Grid>
           )}
+
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={() => navigate("/admin")}
+            >
+              Back
+            </Button>
+          </Grid>
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary" fullWidth>

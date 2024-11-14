@@ -11,6 +11,7 @@ import {
   Paper,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import logo from "../assets/logo.png"; // Pastikan path sesuai lokasi gambar logo Anda
 
 const Login = () => {
@@ -107,6 +108,24 @@ const Login = () => {
                 style: { backgroundColor: "white", borderRadius: 5 },
               }}
             />
+
+            {/* Tombol Back */}
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={() => navigate("/")}
+              style={{
+                marginTop: 10,
+                borderColor: "white",
+                color: "white",
+                borderRadius: 20,
+              }}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+
+            {/* Tombol Submit */}
             <Button
               type="submit"
               fullWidth
