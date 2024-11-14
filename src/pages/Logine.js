@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { login as loginApi } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
-import { Container, TextField, Button, Typography, Box } from "@mui/material";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Paper,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import logo from "../assets/logo.png"; // Pastikan path sesuai lokasi gambar logo Anda
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,53 +32,97 @@ const Login = () => {
 
   return (
     <Container
-      maxWidth="xs"
-      style={{ minHeight: "75vh", display: "flex", alignItems: "center" }}
+      maxWidth="sm"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        backgroundColor: "#f5f5f5",
+      }}
     >
       <Box
         display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
+        flexDirection="row"
         width="100%"
-        padding={3}
-        boxShadow={3}
-        borderRadius={2}
+        justifyContent="center"
       >
-        <Typography variant="h4" component="h1" gutterBottom>
-          Login
-        </Typography>
-        <form onSubmit={handleSubmit} style={{ width: "100%", marginTop: 20 }}>
-          <TextField
-            label="Email"
-            type="email"
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            margin="normal"
-            variant="outlined"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: 20 }}
+        {/* Bagian Ilustrasi Ponsel */}
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          bgcolor="white"
+          p={4}
+        >
+          <img src={logo} alt="Logo" style={{ width: 200, marginTop: 20 }} />{" "}
+          {/* Gambar logo diperbesar */}
+        </Box>
+
+        {/* Bagian Form Login */}
+        <Box
+          flex={1}
+          component={Paper}
+          elevation={6}
+          p={4}
+          borderRadius={2}
+          bgcolor="#007bff"
+          color="white"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Typography variant="h4" component="h1" gutterBottom>
+            Welcome
+          </Typography>
+
+          <form
+            onSubmit={handleSubmit}
+            style={{ width: "100%", marginTop: 20 }}
           >
-            Login
-          </Button>
-        </form>
+            <TextField
+              label="Username"
+              type="text"
+              fullWidth
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              margin="normal"
+              variant="outlined"
+              InputProps={{
+                style: { backgroundColor: "white", borderRadius: 5 },
+              }}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              margin="normal"
+              variant="outlined"
+              InputProps={{
+                style: { backgroundColor: "white", borderRadius: 5 },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              style={{
+                marginTop: 20,
+                backgroundColor: "#28a745",
+                color: "white",
+                borderRadius: 20,
+              }}
+              startIcon={<SendIcon />}
+            >
+              Submit
+            </Button>
+          </form>
+        </Box>
       </Box>
     </Container>
   );
