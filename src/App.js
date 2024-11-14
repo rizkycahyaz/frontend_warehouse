@@ -5,41 +5,43 @@ import Login from './pages/Logine';
 import AddItem from './pages/AddItems';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
-import AuthProvider, { useAuthContext } from './context/authContext'; // Import AuthProvider and the hook
+import AuthProvider, { useAuthContext } from './context/authContext';
 import Layout from './components/Layout';
+import AdminLayout from './components/AdminLayout';
 
 function App() {
   return (
     <AuthProvider>
-      {' '}
-      {/* Ensure this wraps the Router */}
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<SearchPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/add-item" element={<AddItem />} />
-            {/* Use a PrivateRoute component to check authentication */}
-            <Route
-              path="/admin"
-              element={
-                <PrivateRoute>
-                  <AdminDashboard />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Public routes with Layout */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<SearchPage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+
+          {/* Admin routes with PrivateRoute and AdminLayout */}
+          <Route
+            path="/admin/*"
+            element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<AdminDashboard />} />
+            <Route path="add-item" element={<AddItem />} />
+          </Route>
+        </Routes>
       </Router>
     </AuthProvider>
   );
 }
 
-// Create a PrivateRoute component to handle authentication logic
+// PrivateRoute component for handling authentication logic
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useAuthContext(); // Now this works inside a child component of AuthProvider
-
+  const { isAuthenticated } = useAuthContext();
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
