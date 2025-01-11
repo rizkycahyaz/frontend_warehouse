@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instance untuk API Admin Items
 const adminItemApi = axios.create({
-  baseURL: 'http://localhost:3000/api/admin/items' // Base URL untuk API admin items
+  baseURL: 'http://localhost:3000/api/admin/items', // Base URL untuk API admin items
 });
 
 // Fungsi untuk mengambil semua item admin
@@ -31,7 +31,6 @@ const getAdminItems = async () => {
     throw error.response ? error.response.data : new Error('Error fetching admin items');
   }
 };
-
 
 // Fungsi untuk menambahkan item baru
 // const addItem = async (item) => {
@@ -105,7 +104,6 @@ const updateItem = async (id, updatedItem) => {
 //   }
 // };
 
-
 const deleteItem = async (lotBatchNo) => {
   try {
     const token = localStorage.getItem('token');
@@ -127,4 +125,20 @@ const getAllLocations = async () => {
   return response.data;
 };
 
-export { getAdminItems, addItem, updateItem, deleteItem, getAllLocations };
+const getLocations = async () => {
+  try {
+    // Menggunakan endpoint yang baru: /api/locations/all
+    const response = await axios.get('http://localhost:3000/api/locations/all');
+    if (response.data.status) {
+      return response.data.data; // Mengembalikan data lokasi
+    } else {
+      console.warn('Failed to fetch locations:', response.data.message);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching locations:', error.message);
+    throw new Error('Error fetching locations');
+  }
+};
+
+export { getAdminItems, addItem, updateItem, deleteItem, getAllLocations, getLocations };

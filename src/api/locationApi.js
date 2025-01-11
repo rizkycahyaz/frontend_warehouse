@@ -31,12 +31,9 @@ const addLocation = async (location) => {
 };
 
 // locationApi.js
-
-const baseURL = 'http://localhost:3000/api/locations';
-
 const searchLocation = async (lotBatchNo) => {
   try {
-    const response = await axios.post(`${baseURL}/search`, { lot_batch_no: lotBatchNo });
+    const response = await locationApi.post(`/search`, { lot_batch_no: lotBatchNo });
     console.log('API response data:', response.data); // Check if the API call is successful and data structure
     return response.data;
   } catch (error) {
@@ -45,4 +42,15 @@ const searchLocation = async (lotBatchNo) => {
   }
 };
 
-export { searchLocation, addLocation };
+const getLocations = async () => {
+  try {
+    const response = await locationApi.get('/get'); // Endpoint harus benar
+    console.log('Response from API:', response.data); // Log respons API
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching locations:', error.message);
+    throw new Error('Failed to fetch locations');
+  }
+};
+
+export { searchLocation, addLocation, getLocations };
