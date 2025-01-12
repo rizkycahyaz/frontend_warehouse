@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Aplikasi Pencarian Lokasi Barang di Gudang
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi web untuk mempermudah pencarian lokasi barang di gudang menggunakan peta khusus dengan penanda untuk lokasi yang presisi.
 
-## Available Scripts
+## Fitur
 
-In the project directory, you can run:
+- Pencarian barang berdasarkan nomor lot batch.
+- Menampilkan detail barang, termasuk nama, gambar, jumlah, lokasi, dan nama proyek.
+- Peta interaktif dengan penanda lokasi barang.
+- Fungsi admin untuk menambah, mengedit, dan menghapus data barang (memerlukan login).
+- Antarmuka pengguna yang ramah dengan React dan Material-UI.
 
-### `npm start`
+## Teknologi yang Digunakan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React, React Leaflet, Material-UI
+- **Backend**: Express.js, Node.js
+- **Database**: MySQL
+- **Pemetaan**: Peta gudang kustom menggunakan Leaflet.js dengan konversi piksel ke koordinat.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Instalasi
 
-### `npm test`
+### Prasyarat
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js dan npm sudah terpasang.
+- Database MySQL telah disiapkan.
 
-### `npm run build`
+### Repo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[git clone https://github.com/rizkycahyaz/frontend_warehouse.git](https://github.com/rizkycahyaz/frontend_warehouse.git)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Catatan
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Untuk mengakses halaman "Tambah Lokasi", gunakan URL berikut di browser:
+  http://localhost:3001/add-lokasi
 
-### `npm run eject`
+- Halaman ini tidak dimasukkan dalam antarmuka utama karena lokasi barang pada peta gudang telah bersifat tetap. Koordinat untuk setiap lokasi sudah dikonfigurasi berdasarkan tata letak gudang fisik yang tidak berubah.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Halaman ini tersedia melalui URL langsung untuk kebutuhan pemeliharaan atau penyesuaian khusus yang mungkin diperlukan oleh admin atau pengembang.

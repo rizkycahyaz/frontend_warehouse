@@ -68,14 +68,11 @@ const addItem = async (formData) => {
 const updateItem = async (id, updatedItem) => {
   try {
     const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No token found');
-    }
+    if (!token) throw new Error('No token found');
 
-    const response = await adminItemApi.put(`/update/${id}`, updatedItem, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const response = await adminItemApi.put(`/${id}`, updatedItem, {
+      headers: { Authorization: `Bearer ${token}` },
+      'Content-Type': 'multipart/form-data',
     });
     return response.data;
   } catch (error) {
@@ -140,5 +137,23 @@ const getLocations = async () => {
     throw new Error('Error fetching locations');
   }
 };
+// Fungsi untuk mengambil item berdasarkan ID
+const getItemById = async (id) => {
+  try {
+    const token = localStorage.getItem('token'); // Ambil token
+    if (!token) throw new Error('Token missing');
 
-export { getAdminItems, addItem, updateItem, deleteItem, getAllLocations, getLocations };
+    console.log(`Fetching item from: http://localhost:3000/api/items/detail/${id}`);
+    const response = await axios.get(`http://localhost:3000/api/items/detail/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log('Response:', response.data);
+    return response.data; // Data item
+  } catch (error) {
+    console.error('Error fetching item by ID:', error.message);
+    throw new Error('Error fetching item by ID');
+  }
+};
+
+// Jangan lupa untuk mengekspor fungsi ini
+export { getItemById, getAdminItems, addItem, updateItem, deleteItem, getAllLocations, getLocations };

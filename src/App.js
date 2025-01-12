@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import SearchPage from './pages/SearchPage';
 import Login from './pages/Logine';
 import AddItem from './pages/AddItems';
+import EditItem from './pages/EditItems';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import AuthProvider, { useAuthContext } from './context/authContext';
 import Layout from './components/Layout';
 import AdminLayout from './components/AdminLayout';
+import AddLocation from './pages/TambahLokasi';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="add-lokasi" element={<AddLocation />} />
           </Route>
 
           {/* Admin routes with PrivateRoute and AdminLayout */}
@@ -32,6 +35,7 @@ function App() {
           >
             <Route index element={<AdminDashboard />} />
             <Route path="add-item" element={<AddItem />} />
+            <Route path="edit-item/:id" element={<EditItem />} />
           </Route>
         </Routes>
       </Router>
